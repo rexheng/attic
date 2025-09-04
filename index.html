@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attic</title>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --cream: #f2efe8;
+            --off-white: #faf9f7;
+            --warm-grey: #d4d0c8;
+            --charcoal: #1a1a1a;
+            --taupe: #a09890;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 300;
+            background: var(--off-white);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--off-white);
+            border-bottom: 0.5px solid var(--warm-grey);
+            backdrop-filter: blur(10px);
+            background: rgba(250, 249, 247, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'League Spartan', sans-serif;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            color: var(--black);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 0.5px;
+            background: var(--black);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 1px;
+            background: var(--black);
+            margin: 6px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--cream);
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            letter-spacing: 0.3em;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            color: var(--black);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        /* Section Base */
+        section {
+            padding: 8rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            font-weight: 300;
+        }
+
+        /* Performances Section */
+        .performances {
+            background: var(--cream);
+        }
+
+        .tour-dates {
+            margin-top: 3rem;
+        }
+
+        .tour-date {
+            display: grid;
+            grid-template-columns: 150px 1fr auto;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 0.5px solid var(--warm-grey);
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .tour-date:hover {
+            padding-left: 1rem;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .date-info {
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .venue-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .venue-info p {
+            color: var(--taupe);
+            font-size: 0.9rem;
+        }
+
+        .view-btn {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 1px solid var(--black);
+            color: var(--black);
+            text-decoration: none;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .view-btn:hover {
+            background: var(--black);
+            color: var(--cream);
+        }
+
+        /* Band Section */
+        .band {
+            background: var(--off-white);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .member {
+            text-align: center;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--black);
+            transition: width 0.3s ease;
+        }
+
+        .member:hover::before {
+            width: 80%;
+        }
+
+        .member-name {
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            transition: letter-spacing 0.3s ease;
+        }
+
+        .member:hover .member-name {
+            letter-spacing: 0.1em;
+        }
+
+        .member-role {
+            color: var(--taupe);
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--charcoal);
+            color: var(--cream);
+            text-align: center;
+            padding: 6rem 3rem;
+        }
+
+        .contact h2 {
+            color: var(--cream);
+            margin-bottom: 3rem;
+        }
+
+        .contact-info {
+            margin-bottom: 3rem;
+        }
+
+        .contact-info a {
+            color: var(--cream);
+            text-decoration: none;
+            display: block;
+            margin: 1rem 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            opacity: 0.7;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--cream);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--off-white);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 0.5px solid var(--warm-grey);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            section {
+                padding: 4rem 2rem;
+            }
+
+            .tour-date {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">attic</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#performances">performances</a></li>
+                <li><a href="#band">band</a></li>
+                <li><a href="#contact">contact</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>attic</h1>
+            <p class="hero-subtitle">the band</p>
+        </div>
+    </section>
+
+    <!-- Performances Section -->
+    <section class="performances" id="performances">
+        <h2 class="section-title">performances</h2>
+        <div class="tour-dates">
+            <div class="tour-date">
+                <div class="date-info">15 nov 24</div>
+                <div class="venue-info">
+                    <h3>kiluq ball</h3>
+                    <p>london</p>
+                </div>
+                <a href="https://www.instagram.com/p/DB6d0EqoNo3/?igsh=MW5seXBjaGNiZHkxdw==" target="_blank" class="view-btn">view</a>
+            </div>
+            <div class="tour-date">
+                <div class="date-info">24 jan 25</div>
+                <div class="venue-info">
+                    <h3>pro bono prelude</h3>
+                    <p>london</p>
+                </div>
+                <a href="https://www.instagram.com/p/DMV7429M5Sl/?img_index=1&igsh=MXIwbXA2b20xYm1pMA==" target="_blank" class="view-btn">view</a>
+            </div>
+            <div class="tour-date">
+                <div class="date-info">20 nov 24</div>
+                <div class="venue-info">
+                    <h3>casino night</h3>
+                    <p>london</p>
+                </div>
+                <a href="https://www.instagram.com/p/DCrOY4avRHZ/?img_index=1&igsh=MWtiamRjN2FrOGpuag==" target="_blank" class="view-btn">view</a>
+            </div>
+            <div class="tour-date">
+                <div class="date-info">27 mar 25</div>
+                <div class="venue-info">
+                    <h3>music society love concert</h3>
+                    <p>london</p>
+                </div>
+                <a href="https://www.instagram.com/p/DHWXvMEoKWQ/?igsh=bmV0aG01bWdsMXU3" target="_blank" class="view-btn">view</a>
+            </div>
+            <div class="tour-date">
+                <div class="date-info">7 sep 25</div>
+                <div class="venue-info">
+                    <h3>bon voyage</h3>
+                    <p>singapore</p>
+                </div>
+            </div>
+            <div class="tour-date">
+                <div class="date-info">6 sep 25</div>
+                <div class="venue-info">
+                    <h3>bon voyage</h3>
+                    <p>singapore</p>
+                </div>
+                <a href="https://www.instagram.com/p/DOIHAe6kaY2/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="view-btn">view</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Band Section -->
+    <section class="band" id="band">
+        <h2 class="section-title">band</h2>
+        <div class="members-grid">
+            <div class="member">
+                <h3 class="member-name">seraphine</h3>
+                <p class="member-role">vocals</p>
+            </div>
+            <div class="member">
+                <h3 class="member-name">rex</h3>
+                <p class="member-role">keys</p>
+            </div>
+            <div class="member">
+                <h3 class="member-name">christic</h3>
+                <p class="member-role">guitar</p>
+            </div>
+            <div class="member">
+                <h3 class="member-name">andre</h3>
+                <p class="member-role">guitar</p>
+            </div>
+            <div class="member">
+                <h3 class="member-name">lucky</h3>
+                <p class="member-role">bass</p>
+            </div>
+            <div class="member">
+                <h3 class="member-name">yuma</h3>
+                <p class="member-role">drums</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>contact</h2>
+        <div class="contact-info">
+            <a href="mailto:management@atticband.com">management@atticband.com</a>
+            <a href="mailto:press@atticband.com">press@atticband.com</a>
+        </div>
+        <div class="social-links">
+            <a href="https://www.instagram.com/attictheband/" target="_blank">instagram</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 attic. all rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Smooth reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply initial styles and observe elements
+        document.querySelectorAll('.tour-date, .member').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
